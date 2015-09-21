@@ -1,15 +1,14 @@
-body {
-}
-
-div {
-  border: 1px solid red;
-}
-
 #cat-container {
-  display: flex;
+  display: inline-block;
+}
+#cat-list {
+  float: left;
+  width: 20%;
+  display: inline-block;
 }
 
-.cat-image {
-  max-width: 100px;
-  max-height: 100px;
+#cat-display {
+  float: right;
+  width: 75%;
+  display: inline-block;
 }
