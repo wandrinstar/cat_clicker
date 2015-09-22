@@ -31,10 +31,11 @@ function incrementNumClicks(obj){
 $(document).ready(function(){
   createAllCats();
   for (var i in allCats) {
-   var listElem = '<li class="name" cat-id="' + allCats[i].ID + '">' + allCats[i].name + '</li>';
+   var listElem = '<li class="name myButton" cat-id="' +  allCats[i].ID + '">' + allCats[i].name + '</li>';
    $('#cat-list').append(listElem);
   }
   $('.name').click(function() {
+    $(this).focus();
     var obj = allCats[$(this).attr('cat-id')];
     var displayElems = '<p>' + obj.name + '</p>' + '<p class="numClicks">' + obj.numClicks + '</p>' + '<img src="' + obj.imgURL + '"/>';
     $('.display-container').empty().append(displayElems);
