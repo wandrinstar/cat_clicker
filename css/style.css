@@ -1,3 +1,6 @@
+body {
+  background-color: lightblue;
+}
 .list-container {
   float: left;
   width: 20%;
