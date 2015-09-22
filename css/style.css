@@ -1,14 +1,17 @@
 #cat-container {
   display: inline-block;
 }
-#cat-list {
+.list-container {
   float: left;
   width: 20%;
   display: inline-block;
 }
-
-#cat-display {
+.display-container {
   float: right;
-  width: 75%;
+  width: 60%;
   display: inline-block;
+}
+img {
+  width: 200px;
+  height: 200px;
 }
