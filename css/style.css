@@ -12,8 +12,8 @@ body {
   display: inline-block;
 }
 img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 75%;
+  max-height: 75%;
 }
 .myButton {
 	background-color:#44c767;
