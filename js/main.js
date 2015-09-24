@@ -19,7 +19,7 @@ $(function(){
       return cat
     },
 
-    createAllCats: function() {
+    init: function() {
       for (var i in model.catData) {
         var catInfo = model.catData[i];
         var cat = model.createCat(catInfo[0], catInfo[1], i);
@@ -31,9 +31,9 @@ $(function(){
 
   var octopus = {
     init: function() {
-      model.createAllCats();
+      model.init();
       viewList.init();
-      viewImage.render();
+      viewImage.init();
       viewForm.init();
     },
 
@@ -59,7 +59,7 @@ $(function(){
       $('#cat-list').empty();
       viewList.init();
       $('.display-container').empty();
-      viewImage.render();
+      viewImage.init();
     }
   }
 
@@ -76,7 +76,7 @@ $(function(){
 
 
   var viewImage = {
-    render: function() {
+    init: function() {
       $('.myButton').click(function() {
         octopus.updateCurrentCat($(this));
         var displayElems = '<h3>' + currentCat.name + '</h3>' + '<p class="numClicks">' + currentCat.numClicks + '</p>' + '<img src="' + currentCat.imgURL + '"/>';
