@@ -1,4 +1,5 @@
 $(function(){
+  var currentCat;
 
   var model = {
     catData: [["https://upload.wikimedia.org/wikipedia/commons/6/69/June_odd-eyed-cat_cropped.jpg", 'Bob'],
@@ -31,27 +32,40 @@ $(function(){
   var octopus = {
     init: function() {
       model.createAllCats();
-      viewList.render();
+      viewList.init();
       viewImage.render();
+      viewForm.init();
     },
 
     getAllCats: function() {
       return model.allCats;
     },
 
-    getClickedCat: function(clickedElem) {
-      return model.allCats[clickedElem.attr('cat-id')];
+    updateCurrentCat: function(clickedElem) {
+      currentCat = model.allCats[clickedElem.attr('cat-id')];
     },
 
-    updateClicks: function(cat){
-      cat.numClicks += 1;
-      return cat.numClicks;
+    updateClicks: function(){
+      currentCat.numClicks += 1;
+      return currentCat.numClicks;
+    },
+
+    updateFormData: function(data) {
+      currentCat.name = data[0].value;
+      currentCat.imgURL = data[1].value;
+      currentCat.numClicks  = parseInt(data[2].value);
+      viewForm.init();
+
+      $('#cat-list').empty();
+      viewList.init();
+      $('.display-container').empty();
+      viewImage.render();
     }
   }
 
 
   var viewList = {
-    render: function() {
+    init: function() {
       var allCats = octopus.getAllCats();
       for (var i in allCats){
         var listElem = '<li class="myButton" cat-id="' +  allCats[i].id + '">' + allCats[i].name + '</li>';
@@ -64,17 +78,42 @@ $(function(){
   var viewImage = {
     render: function() {
       $('.myButton').click(function() {
-        var cat = octopus.getClickedCat($(this));
-        var displayElems = '<p>' + cat.name + '</p>' + '<p class="numClicks">' + cat.numClicks + '</p>' + '<img src="' + cat.imgURL + '"/>';
+        octopus.updateCurrentCat($(this));
+        var displayElems = '<h3>' + currentCat.name + '</h3>' + '<p class="numClicks">' + currentCat.numClicks + '</p>' + '<img src="' + currentCat.imgURL + '"/>';
         $('.display-container').empty().append(displayElems);
-        viewImage.clickListener(cat);
+        viewImage.clickListener();
+        viewForm.fillForm();
       });
     },
 
-    clickListener: function(cat) {
+    clickListener: function() {
       $('img').click(function() {
-        var numClicks = octopus.updateClicks(cat);
+        var numClicks = octopus.updateClicks();
         $('.numClicks').text(numClicks);
+        viewForm.fillForm();
+      });
+    }
+  }
+
+  var viewForm = {
+    init: function(){
+      $('form').hide();
+      $('#button-admin').click(function() {
+        $('form').show();
+      });
+      $('#button-cancel').click(function(){
+        $('form').hide();
+      });
+    },
+
+    fillForm: function() {
+      $('input[name="name"]').val(currentCat.name);
+      $('input[name="imgURL"]').val(currentCat.imgURL);
+      $('input[name="numClicks"]').val(currentCat.numClicks);
+      $('#form-admin').submit(function(e){
+        e.preventDefault();
+        var data = $("#form-admin").serializeArray();
+        octopus.updateFormData(data);
       });
     }
   }

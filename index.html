@@ -8,11 +8,22 @@
     <script src="js/main.js"></script>
 </head>
 <body>
-    <div id="cat-container">
-      <div class="list-container">
-          <ul id="cat-list"></ul>
-      </div>
-      <div class="display-container"></div>
+    <div>
+      <button id="button-admin">Admin</button>
+      <form id="form-admin" method="post">
+        Name <input type="text" name="name"></input>
+        URL <input name="imgURL"></input>
+        Clicks <input name="numClicks"></input>
+        <input type="button" id="button-cancel" value="Cancel"></input>
+        <input type="submit" id="button-save" value="Save"></input>
+      </form>
+    </div>
+
+    <div class="list-container">
+        <ul id="cat-list"></ul>
+    </div>
+
+    <div class="display-container">
     </div>
 </body>
 </html>
